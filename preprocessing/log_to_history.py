@@ -10,7 +10,7 @@ from itertools import chain, repeat, islice
 class Log():
     def __init__(self, log, setting):
         self.__log_name = log
-        self.__log = pd.read_csv('multioutput/event_log/'+log+'.csv')
+        self.__log = pd.read_csv('event_log/'+log+'.csv')
         self.__train = []
         self.__test = []
         self.__len_prefix_train = []

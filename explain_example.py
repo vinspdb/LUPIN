@@ -56,22 +56,22 @@ if __name__ == '__main__':
     print('device-->', device)
     csv_log = sys.argv[1]
     TYPE = 'all'
-    with open('multioutput/log_history/' + csv_log + '/' + csv_log + '_test_' + TYPE + '.pkl', 'rb') as f:
+    with open('log_history/' + csv_log + '/' + csv_log + '_test_' + TYPE + '.pkl', 'rb') as f:
         test = pickle.load(f)
 
-    with open('multioutput/log_history/' + csv_log + '/' + csv_log + '_label_test_' + TYPE + '.pkl', 'rb') as f:
+    with open('log_history/' + csv_log + '/' + csv_log + '_label_test_' + TYPE + '.pkl', 'rb') as f:
         y_test = pickle.load(f)
 
-    with open('multioutput/log_history/' + csv_log + '/' + csv_log + '_id2label_' + TYPE + '.pkl', 'rb') as f:
+    with open('log_history/' + csv_log + '/' + csv_log + '_id2label_' + TYPE + '.pkl', 'rb') as f:
         id2label = pickle.load(f)
 
-    with open('multioutput/log_history/' + csv_log + '/' + csv_log + '_label2id_' + TYPE + '.pkl', 'rb') as f:
+    with open('log_history/' + csv_log + '/' + csv_log + '_label2id_' + TYPE + '.pkl', 'rb') as f:
         label2id = pickle.load(f)
 
-    with open('multioutput/log_history/' + csv_log + '/' + csv_log + '_suffix_train_' + TYPE + '.pkl', 'rb') as f:
+    with open('log_history/' + csv_log + '/' + csv_log + '_suffix_train_' + TYPE + '.pkl', 'rb') as f:
         y_train_suffix = pickle.load(f)
 
-    with open('multioutput/log_history/' + csv_log + '/' + csv_log + '_suffix_test_' + TYPE + '.pkl', 'rb') as f:
+    with open('log_history/' + csv_log + '/' + csv_log + '_suffix_test_' + TYPE + '.pkl', 'rb') as f:
         y_test_suffix = pickle.load(f)
 
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         output_sizes.append(len(id2label['activity']))
 
     model_original = original(bertmodel, output_sizes).to(device)
-    model_original.load_state_dict(torch.load('multioutput/models/' + csv_log + '_' + TYPE + '.pth'))
+    model_original.load_state_dict(torch.load('models/' + csv_log + '_' + TYPE + '.pth'))
     model_original.eval()
     model_original.zero_grad()
     input_ids = first_element['input_ids'].to(device)
@@ -112,7 +112,7 @@ if __name__ == '__main__':
         model = BertMultiOutputClassificationHeads(bertmodel, output_sizes, j)
         pred =output[j].argmax(dim=1).item()
         # Load the state dictionary into the model
-        model.load_state_dict(torch.load('multioutput/models/' + csv_log + '_' + TYPE + '.pth'))
+        model.load_state_dict(torch.load('models/' + csv_log + '_' + TYPE + '.pth'))
         model = model.to(device)
         # Make sure to set the model in evaluation mode if you're not training it further
         model.eval()

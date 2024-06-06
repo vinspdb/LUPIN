@@ -158,7 +158,6 @@ if __name__ == '__main__':
 
     html = visualization.visualize_text(vis_data_records)
     soup = BeautifulSoup(html.data, 'html.parser')
-    soup = str(soup).replace('.', '.<br>')
 
     with open('html_file.html', 'w') as f:
         f.write(str(soup))

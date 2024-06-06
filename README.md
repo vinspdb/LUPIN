@@ -15,3 +15,5 @@ Evaluate the model:
 ```
 python -m eval_model <event_log_name>
 ```
+Link to fine-tuned models:
+https://drive.google.com/drive/folders/1LvDCl4HnkPJzlTmODtRmGug2xpwxq80M?usp=sharing
